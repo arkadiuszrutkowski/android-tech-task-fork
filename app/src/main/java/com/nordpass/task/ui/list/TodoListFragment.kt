@@ -18,7 +18,6 @@ class TodoListFragment : BaseFragment(R.layout.fragment_list) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.items.observe(this, { adapter?.submitList(it) })
         viewModel.showItem.observe(this, Observer(::showTodoDetails))
     }
 
@@ -26,6 +25,9 @@ class TodoListFragment : BaseFragment(R.layout.fragment_list) {
         super.onViewCreated(view, savedInstanceState)
         adapter = TodoListAdapter(viewModel::onItemClicked)
         view.findViewById<RecyclerView>(R.id.todoRecycler)?.adapter = adapter
+
+        viewModel.items.observe(viewLifecycleOwner, { adapter?.submitList(it) })
+        viewModel.init()
     }
 
     private fun showTodoDetails(todo: Todo) {

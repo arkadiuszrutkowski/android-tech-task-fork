@@ -13,5 +13,4 @@ internal interface StorageModule {
 
     @Binds
     fun bindTodoStorage(storage: RoomTodoStorage): TodoStorage
-
 }

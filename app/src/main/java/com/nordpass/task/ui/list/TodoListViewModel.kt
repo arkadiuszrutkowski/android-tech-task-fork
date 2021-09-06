@@ -9,12 +9,12 @@ import com.nordpass.tt.usecase.todolist.GetTodoListUseCase
 import io.reactivex.rxkotlin.subscribeBy
 
 class TodoListViewModel @ViewModelInject constructor(
-    getTodoListUseCase: GetTodoListUseCase
+    private val getTodoListUseCase: GetTodoListUseCase
 ) : BaseViewModel() {
     val items = MutableLiveData<List<Todo>>()
     val showItem = MutableLiveData<Todo>()
 
-    init {
+    fun init() {
         getTodoListUseCase.get()
             .subscribeBy(onSuccess = items::postValue, onError = ::handleError)
             .attach()

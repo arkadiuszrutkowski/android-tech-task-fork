@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="32dp"
             android:orientation="vertical">
 
             <Button
@@ -51,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_button_background"
                 android:onClick="@{view -> viewModel.onEditClicked()}"
                 android:text="@string/editButtonText" />
@@ -60,25 +60,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_button_background"
                 android:onClick="@{view -> viewModel.onTodoClicked()}"
                 android:text="@string/todoButtonText"
-                android:visibility="@{viewModel.item.completed ? View.VISIBLE  : View.GONE}" />
+                android:visibility="@{viewModel.item.completed ? View.VISIBLE : View.GONE}" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
                 android:background="@drawable/rounded_button_background"
                 android:onClick="@{view -> viewModel.onFinishedClicked()}"
                 android:text="@string/finishedButtonText"
-                android:visibility="@{viewModel.item.completed ? View.GONE  : View.VISIBLE}" />
+                android:visibility="@{viewModel.item.completed ? View.GONE : View.VISIBLE}" />
         </LinearLayout>
     </FrameLayout>
 </layout>
