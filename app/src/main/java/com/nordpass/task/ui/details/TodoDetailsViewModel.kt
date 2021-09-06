@@ -4,12 +4,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.nordpass.task.ui.base.BaseViewModel
 import com.nordpass.tt.usecase.Todo
+import com.nordpass.tt.usecase.common.Time
 import com.nordpass.tt.usecase.todolist.UpdateTodoItemUseCase
 import io.reactivex.rxkotlin.subscribeBy
 
 class TodoDetailsViewModel @ViewModelInject constructor(
     private val updateTodoItemUseCase: UpdateTodoItemUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     val item = MutableLiveData<Todo>()
 
@@ -18,20 +19,25 @@ class TodoDetailsViewModel @ViewModelInject constructor(
     }
 
     fun onFinishedClicked() {
-        val finishedItem = item.value?.copy(isCompleted = true) ?: return
-        updateTodoItemUseCase.update(finishedItem)
-            .subscribeBy(onComplete = { item.postValue(finishedItem) }, onError = ::handleError)
-            .attach()
+        updateCompletionState(true)
     }
 
     fun onTodoClicked() {
-        val unfinishedItem = item.value?.copy(isCompleted = false) ?: return
-        updateTodoItemUseCase.update(unfinishedItem)
-            .subscribeBy(onComplete = { item.postValue(unfinishedItem) }, onError = ::handleError)
-            .attach()
+        updateCompletionState(false)
     }
 
     fun onEditClicked() {
         //todo
+    }
+
+    private fun updateCompletionState(isCompleted: Boolean) {
+        val updatedItem = item.value?.copy(
+            isCompleted = isCompleted,
+            updatedAt = Time.now()
+        ) ?: return
+
+        updateTodoItemUseCase.update(updatedItem)
+            .subscribeBy(onComplete = { item.postValue(updatedItem) }, onError = ::handleError)
+            .attach()
     }
 }
