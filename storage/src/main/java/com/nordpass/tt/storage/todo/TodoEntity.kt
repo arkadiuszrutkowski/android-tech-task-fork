@@ -8,5 +8,6 @@ internal class TodoEntity(
     @PrimaryKey val id: Int,
     val title: String,
     val isCompleted: Boolean,
-    val updatedAt: String
+    val updatedAt: String,
+    val dueOn: String
 )

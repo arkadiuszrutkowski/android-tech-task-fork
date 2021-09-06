@@ -15,7 +15,7 @@ object DatabaseModule {
     internal fun provideDatabase(context: Context): TodoDatabase {
         return Room.databaseBuilder(context, TodoDatabase::class.java, "db")
             .fallbackToDestructiveMigration()
-            .addMigrations(Migrations.migration_1_2)
+            .addMigrations(*Migrations.allMigrations)
             .build()
     }
 }

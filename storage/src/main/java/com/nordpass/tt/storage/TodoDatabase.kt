@@ -6,7 +6,7 @@ import com.nordpass.tt.storage.todo.TodoDao
 import com.nordpass.tt.storage.todo.TodoEntity
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [TodoEntity::class]
 )
 internal abstract class TodoDatabase : RoomDatabase() {

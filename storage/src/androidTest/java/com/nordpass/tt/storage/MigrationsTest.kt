@@ -18,9 +18,9 @@ class MigrationsTest {
     )
 
     @Test
-    fun validateMigration_1_2() {
+    fun validateAllMigrations() {
         helper.createDatabase(DATABASE_NAME, 1)
-        helper.runMigrationsAndValidate(DATABASE_NAME, 2, false, Migrations.migration_1_2)
+        helper.runMigrationsAndValidate(DATABASE_NAME, 3, false, *Migrations.allMigrations)
     }
 
     companion object {
