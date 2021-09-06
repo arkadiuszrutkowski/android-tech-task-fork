@@ -9,5 +9,13 @@ class GetTodoListUseCase @Inject constructor(
 ) {
     fun get(): Single<List<Todo>> {
         return storage.getAll()
+            .map { todoItems ->
+                val unfinishedItems = todoItems.filter { it.isCompleted.not() }
+                val finishedItems = todoItems.filter { it.isCompleted }
+                sortTasksByDueOnDate(unfinishedItems) + sortTasksByDueOnDate(finishedItems)
+            }
     }
+
+    private fun sortTasksByDueOnDate(tasks: List<Todo>) =
+        tasks.sortedBy { it.dueOn }
 }
