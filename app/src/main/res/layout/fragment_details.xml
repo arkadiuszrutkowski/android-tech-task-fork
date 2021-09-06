@@ -11,47 +11,74 @@
             type="com.nordpass.task.ui.details.TodoDetailsViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="@{viewModel.item.title}"
-            android:textSize="20sp"
-            tools:text="Todo item title" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@{viewModel.item.title}"
+                android:textSize="20sp"
+                tools:text="Todo item title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
+                android:text="@{viewModel.item.completed ? @string/completedLabel : @string/unfinishedLabel}"
+                tools:text="@string/completedLabel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="64dp"
-            android:text="@{viewModel.item.completed ? @string/completedLabel : @string/unfinishedLabel}"
-            tools:text="@string/completedLabel" />
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{view -> viewModel.onEditClicked()}"
-            android:text="@string/editButtonText" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button_background"
+                android:onClick="@{view -> viewModel.onEditClicked()}"
+                android:text="@string/editButtonText" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{view -> viewModel.onTodoClicked()}"
-            android:text="@string/todoButtonText"
-            android:visibility="@{viewModel.item.completed ? View.VISIBLE  : View.GONE}" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button_background"
+                android:onClick="@{view -> viewModel.onTodoClicked()}"
+                android:text="@string/todoButtonText"
+                android:visibility="@{viewModel.item.completed ? View.VISIBLE  : View.GONE}" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{view -> viewModel.onFinishedClicked()}"
-            android:text="@string/finishedButtonText"
-            android:visibility="@{viewModel.item.completed ? View.GONE  : View.VISIBLE}" />
-
-    </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/rounded_button_background"
+                android:onClick="@{view -> viewModel.onFinishedClicked()}"
+                android:text="@string/finishedButtonText"
+                android:visibility="@{viewModel.item.completed ? View.GONE  : View.VISIBLE}" />
+        </LinearLayout>
+    </FrameLayout>
 </layout>
