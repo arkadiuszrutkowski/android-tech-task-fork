@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.nordpass.task.R
 import com.nordpass.task.databinding.FragmentDetailsBinding
 import com.nordpass.task.ui.base.BaseFragment
+import com.nordpass.tt.usecase.common.Time
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
