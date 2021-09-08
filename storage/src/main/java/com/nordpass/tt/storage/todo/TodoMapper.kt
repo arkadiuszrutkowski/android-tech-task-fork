@@ -10,7 +10,7 @@ internal class TodoMapper @Inject constructor() {
             id = entity.id,
             title = entity.title,
             isCompleted = entity.isCompleted,
-            createdAt = entity.createdAt,
+            updatedAt = entity.updatedAt
         )
     }
 
@@ -19,7 +19,7 @@ internal class TodoMapper @Inject constructor() {
             id = todo.id,
             title = todo.title,
             isCompleted = todo.isCompleted,
-            createdAt = todo.createdAt
+            updatedAt = todo.updatedAt
         )
     }
 }

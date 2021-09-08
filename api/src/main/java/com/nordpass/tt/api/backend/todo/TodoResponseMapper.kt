@@ -8,12 +8,12 @@ internal class TodoResponseMapper @Inject constructor() {
     fun map(response: TodoResponse): Todo? {
         val id = response.id ?: return null
         val title = response.title ?: return null
-        val completed = response.completed ?: false
+        val completed = response.status == "completed"
         return Todo(
             id = id,
             title = title,
             isCompleted = completed,
-            createdAt = response.createdAt ?: ""
+            updatedAt = ""
         )
     }
 }

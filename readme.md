@@ -52,4 +52,3 @@ App is modularized. Modules used in the app:
 * App does not work properly on release version. Could you figure out what is wrong and maybe fix it?
 * Update app to support `Dark Theme`. Use already existing colors in colors res. Example: <a href="https://github.com/NordPass/android-tech-task/tree/master/uiSamples/darkTheme.jpg">uiSamples/darkTheme</a>
 * Write some tests
-

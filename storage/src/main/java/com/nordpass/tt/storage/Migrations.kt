@@ -10,7 +10,7 @@ internal object Migrations {
         override fun migrate(database: SupportSQLiteDatabase) {
             val table = TodoDao.TABLE_NAME
             database.execSQL(
-                "ALTER TABLE $table ADD COLUMN createdAt TEXT NOT NULL DEFAULT ''"
+                "ALTER TABLE $table ADD COLUMN updatedAt TEXT NOT NULL DEFAULT ''"
             )
         }
     }
