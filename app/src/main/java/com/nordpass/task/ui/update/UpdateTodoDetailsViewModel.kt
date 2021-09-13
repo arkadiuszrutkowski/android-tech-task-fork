@@ -1,7 +1,9 @@
 package com.nordpass.task.ui.update
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.nordpass.task.R
 import com.nordpass.task.ui.base.BaseViewModel
 import com.nordpass.task.ui.base.ResourceProvider
@@ -12,11 +14,12 @@ import com.nordpass.tt.usecase.todolist.UpdateTodoItemUseCase
 import io.reactivex.rxkotlin.subscribeBy
 
 class UpdateTodoDetailsViewModel @ViewModelInject constructor(
+    @Assisted savedStateHandle: SavedStateHandle,
     private val resourceProvider: ResourceProvider,
     private val updateTodoItemUseCase: UpdateTodoItemUseCase
 ) : BaseViewModel() {
 
-    val todoText = MutableLiveData<String>()
+    val todoText = savedStateHandle.getLiveData<String>("todoText")
     val textError = mediatorLiveData(todoText) {
         if (it.isNotEmpty()) "" else resourceProvider.getString(R.string.error_text_not_empty)
     }
@@ -24,7 +27,7 @@ class UpdateTodoDetailsViewModel @ViewModelInject constructor(
 
     val eventStream = SingleLiveEvent<Event>()
 
-    private val todo = MutableLiveData<Todo>()
+    private val todo = savedStateHandle.getLiveData<Todo>("todo")
 
     fun init(todo: Todo) {
         this.todo.value = todo

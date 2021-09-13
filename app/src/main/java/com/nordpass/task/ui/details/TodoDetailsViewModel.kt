@@ -1,7 +1,8 @@
 package com.nordpass.task.ui.details
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.nordpass.task.ui.base.BaseViewModel
 import com.nordpass.task.ui.base.SingleLiveEvent
 import com.nordpass.tt.usecase.Todo
@@ -10,10 +11,11 @@ import com.nordpass.tt.usecase.todolist.UpdateTodoItemUseCase
 import io.reactivex.rxkotlin.subscribeBy
 
 class TodoDetailsViewModel @ViewModelInject constructor(
+    @Assisted savedStateHandle: SavedStateHandle,
     private val updateTodoItemUseCase: UpdateTodoItemUseCase
 ) : BaseViewModel() {
 
-    val item = MutableLiveData<Todo>()
+    val item = savedStateHandle.getLiveData<Todo>("item")
 
     val eventStream = SingleLiveEvent<Event>()
 
