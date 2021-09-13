@@ -12,7 +12,8 @@ class TodoListViewModel @ViewModelInject constructor(
     private val getTodoListUseCase: GetTodoListUseCase
 ) : BaseViewModel() {
     val items = MutableLiveData<List<Todo>>()
-    val showItem = MutableLiveData<Todo>()
+
+    val eventStream = SingleLiveEvent<Event>()
 
     fun init() {
         getTodoListUseCase.get()
@@ -21,6 +22,10 @@ class TodoListViewModel @ViewModelInject constructor(
     }
 
     fun onItemClicked(todo: Todo) {
-        showItem.postValue(todo)
+        eventStream.value = Event.GoToTodoDetails(todo)
+    }
+
+    sealed class Event {
+        data class GoToTodoDetails(val todo: Todo) : Event()
     }
 }

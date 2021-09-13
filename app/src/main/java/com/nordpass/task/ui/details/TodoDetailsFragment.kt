@@ -10,7 +10,6 @@ import com.nordpass.task.databinding.FragmentDetailsBinding
 import com.nordpass.task.ui.base.BaseFragment
 import com.nordpass.task.ui.base.ext.handleNavigationResult
 import com.nordpass.task.ui.details.TodoDetailsViewModel.*
-import com.nordpass.tt.usecase.common.Time
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,9 +33,9 @@ class TodoDetailsFragment : BaseFragment(R.layout.fragment_details) {
 
         handleNavigationResult(R.id.todoDetailsFragment, viewModel::init)
 
-        viewModel.navigationEvents.observe(viewLifecycleOwner) { event ->
+        viewModel.eventStream.observe(viewLifecycleOwner) { event ->
             when (event) {
-                is NavigationEvent.GoToUpdateTodoEvent -> {
+                is Event.GoToUpdateTodoDetails -> {
                     findNavController().navigate(
                         TodoDetailsFragmentDirections.actionUpdateTodo(
                             event.todo

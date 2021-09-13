@@ -15,7 +15,7 @@ class TodoDetailsViewModel @ViewModelInject constructor(
 
     val item = MutableLiveData<Todo>()
 
-    val navigationEvents = SingleLiveEvent<NavigationEvent>()
+    val eventStream = SingleLiveEvent<Event>()
 
     fun init(item: Todo) {
         this.item.value = item
@@ -31,7 +31,7 @@ class TodoDetailsViewModel @ViewModelInject constructor(
 
     fun onEditClicked() {
         item.value?.let { todo ->
-            navigationEvents.value = NavigationEvent.GoToUpdateTodoEvent(todo)
+            eventStream.value = Event.GoToUpdateTodoDetails(todo)
         }
     }
 
@@ -46,7 +46,7 @@ class TodoDetailsViewModel @ViewModelInject constructor(
             .attach()
     }
 
-    sealed class NavigationEvent {
-        data class GoToUpdateTodoEvent(val todo: Todo) : NavigationEvent()
+    sealed class Event {
+        data class GoToUpdateTodoDetails(val todo: Todo) : Event()
     }
 }

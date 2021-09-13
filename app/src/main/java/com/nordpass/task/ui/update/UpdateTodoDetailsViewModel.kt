@@ -22,7 +22,7 @@ class UpdateTodoDetailsViewModel @ViewModelInject constructor(
     }
     val saveEnabled = mediatorLiveData(todoText) { it.isNotEmpty() }
 
-    val navigationEvents = SingleLiveEvent<NavigationEvent>()
+    val eventStream = SingleLiveEvent<Event>()
 
     private val todo = MutableLiveData<Todo>()
 
@@ -40,14 +40,14 @@ class UpdateTodoDetailsViewModel @ViewModelInject constructor(
         updateTodoItemUseCase.update(updatedTodo)
             .subscribeBy(
                 onComplete = {
-                    navigationEvents.postValue(NavigationEvent.TodoUpdateFinishedEvent(updatedTodo))
+                    eventStream.postValue(Event.TodoUpdateFinished(updatedTodo))
                 },
                 onError = ::handleError
             )
             .attach()
     }
 
-    sealed class NavigationEvent {
-        data class TodoUpdateFinishedEvent(val updatedTodo: Todo) : NavigationEvent()
+    sealed class Event {
+        data class TodoUpdateFinished(val updatedTodo: Todo) : Event()
     }
 }

@@ -32,9 +32,9 @@ class UpdateTodoDetailsFragment : BaseFragment(R.layout.fragment_update) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        viewModel.navigationEvents.observe(viewLifecycleOwner) { event ->
+        viewModel.eventStream.observe(viewLifecycleOwner) { event ->
             when (event) {
-                is NavigationEvent.TodoUpdateFinishedEvent -> {
+                is Event.TodoUpdateFinished -> {
                     setNavigationResult(event.updatedTodo)
                     findNavController().popBackStack()
                 }
