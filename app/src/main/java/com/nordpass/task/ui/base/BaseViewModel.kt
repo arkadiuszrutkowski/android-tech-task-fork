@@ -1,5 +1,7 @@
 package com.nordpass.task.ui.base
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -11,6 +13,16 @@ abstract class BaseViewModel : ViewModel() {
 
     protected fun Disposable.attach() {
         disposables.add(this)
+    }
+
+    protected fun <T, R> mediatorLiveData(
+        source: LiveData<T>,
+        mapper: (T) -> R
+    ): MediatorLiveData<R> {
+        return MediatorLiveData<R>().also { mediatorLiveData ->
+            val observer: (T) -> Unit = { mediatorLiveData.value = mapper(it) }
+            mediatorLiveData.addSource(source, observer)
+        }
     }
 
     protected open fun handleError(error: Throwable) {

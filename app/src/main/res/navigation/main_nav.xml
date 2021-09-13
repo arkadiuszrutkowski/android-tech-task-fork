@@ -33,5 +33,18 @@
         <argument
             android:name="todo"
             app:argType="com.nordpass.tt.usecase.Todo" />
+        <action
+            android:id="@+id/actionUpdateTodo"
+            app:destination="@id/updateTotoDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateTotoDetailsFragment"
+        android:name="com.nordpass.task.ui.update.UpdateTodoDetailsFragment"
+        android:label="UpdateTodoDetailsFragment"
+        tools:layout="@layout/fragment_update">
+        <argument
+            android:name="todo"
+            app:argType="com.nordpass.tt.usecase.Todo" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.nordpass.task.ui.details
+package com.nordpass.task.ui.update
 
 import android.os.Bundle
 import android.view.View
@@ -6,17 +6,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.nordpass.task.R
-import com.nordpass.task.databinding.FragmentDetailsBinding
+import com.nordpass.task.databinding.FragmentUpdateBinding
 import com.nordpass.task.ui.base.BaseFragment
-import com.nordpass.task.ui.base.ext.handleNavigationResult
-import com.nordpass.task.ui.details.TodoDetailsViewModel.*
-import com.nordpass.tt.usecase.common.Time
+import com.nordpass.task.ui.base.ext.setNavigationResult
+import com.nordpass.task.ui.update.UpdateTodoDetailsViewModel.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TodoDetailsFragment : BaseFragment(R.layout.fragment_details) {
-    private val viewModel: TodoDetailsViewModel by viewModels()
-    private val args: TodoDetailsFragmentArgs by navArgs()
+class UpdateTodoDetailsFragment : BaseFragment(R.layout.fragment_update) {
+
+    private val viewModel: UpdateTodoDetailsViewModel by viewModels()
+    private val args: UpdateTodoDetailsFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,21 +27,16 @@ class TodoDetailsFragment : BaseFragment(R.layout.fragment_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentDetailsBinding.bind(view)
 
+        val binding = FragmentUpdateBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        handleNavigationResult(R.id.todoDetailsFragment, viewModel::init)
-
         viewModel.navigationEvents.observe(viewLifecycleOwner) { event ->
             when (event) {
-                is NavigationEvent.GoToUpdateTodoEvent -> {
-                    findNavController().navigate(
-                        TodoDetailsFragmentDirections.actionUpdateTodo(
-                            event.todo
-                        )
-                    )
+                is NavigationEvent.TodoUpdateFinishedEvent -> {
+                    setNavigationResult(event.updatedTodo)
+                    findNavController().popBackStack()
                 }
             }
         }
