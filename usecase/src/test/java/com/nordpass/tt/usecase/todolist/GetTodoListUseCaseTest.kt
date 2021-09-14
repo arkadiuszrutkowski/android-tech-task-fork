@@ -3,7 +3,6 @@ package com.nordpass.tt.usecase.todolist
 import com.nhaarman.mockitokotlin2.whenever
 import com.nordpass.tt.usecase.Todo
 import io.reactivex.Single
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
@@ -21,15 +20,15 @@ class GetTodoListUseCaseTest {
     }
 
     @Test
-    fun shouldReturnUnfinishedAndMostRecentlyUpdatedItemsAtTop() {
+    fun shouldReturnUnfinishedAndWithNoMuchTimeLeftItemsAtTop() {
         // given
         val expectedItems = provideExpectedOrderedTodoItems()
 
-        // when
-        val actualItems = sut.get().blockingGet()
-
-        // then
-        assertThat(actualItems).isEqualTo(expectedItems)
+        // when & then
+        sut.get()
+            .test()
+            .assertValue { actualItems -> actualItems == expectedItems }
+            .assertComplete()
     }
 
     private fun provideTodoItems(): List<Todo> = listOf(

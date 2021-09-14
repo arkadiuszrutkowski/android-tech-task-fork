@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/small_margin"
                 android:gravity="center"
                 android:text="@{viewModel.item.title}"
                 android:textSize="20sp"
@@ -50,8 +50,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
                 android:background="@drawable/rounded_button_background"
                 android:onClick="@{view -> viewModel.onEditClicked()}"
                 android:text="@string/editButtonText" />
@@ -59,9 +59,9 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
                 android:background="@drawable/rounded_button_background"
                 android:onClick="@{view -> viewModel.onTodoClicked()}"
                 android:text="@string/todoButtonText"
@@ -70,9 +70,9 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
                 android:background="@drawable/rounded_button_background"
                 android:onClick="@{view -> viewModel.onFinishedClicked()}"
                 android:text="@string/finishedButtonText"
