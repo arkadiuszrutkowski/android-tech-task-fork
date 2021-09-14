@@ -55,3 +55,17 @@ App is modularized. Modules used in the app:
 * There are some bugs in the app. If you notice some, please fix.
 * App does not work properly on release version. Could you figure out what is wrong and maybe fix it?
 * Write some tests
+
+## Interviewee considerations
+
+During bugfixing I've found one issue I wasn't sure if that's actual bug or intended behaviour.
+When app has no access to network then it just stops at splashscreen.
+
+Since app already has implemented local database I've assumed initially that supports offline mode.
+However since it syncs data with backend at start I've also assumed "fail fast" approach to prevent outdated states.
+
+So I've got dilemma - feature accessibility (offline mode) vs data integrity (fail fast).
+
+I've chosen latter but if customer wants to support offline mode then it's easy
+to change because I would ignore displaying backend error and go straight to todo list for purpose of this technical task.
+For more "production ready" approach probably tasks could be updated not only locally but also on backend side.
