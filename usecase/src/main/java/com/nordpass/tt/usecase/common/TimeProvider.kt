@@ -1,7 +1,8 @@
 package com.nordpass.tt.usecase.common
 
 import org.threeten.bp.OffsetDateTime
+import javax.inject.Inject
 
-object Time {
+class TimeProvider @Inject constructor() {
     fun now(): OffsetDateTime = OffsetDateTime.now()
 }

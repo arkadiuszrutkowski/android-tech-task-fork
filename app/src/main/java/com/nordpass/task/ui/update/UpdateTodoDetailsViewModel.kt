@@ -2,19 +2,19 @@ package com.nordpass.task.ui.update
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.nordpass.task.R
 import com.nordpass.task.ui.base.BaseViewModel
 import com.nordpass.task.ui.base.ResourceProvider
 import com.nordpass.task.ui.base.SingleLiveEvent
 import com.nordpass.tt.usecase.Todo
-import com.nordpass.tt.usecase.common.Time
+import com.nordpass.tt.usecase.common.TimeProvider
 import com.nordpass.tt.usecase.todolist.UpdateTodoItemUseCase
 import io.reactivex.rxkotlin.subscribeBy
 
 class UpdateTodoDetailsViewModel @ViewModelInject constructor(
     @Assisted savedStateHandle: SavedStateHandle,
+    private val timeProvider: TimeProvider,
     private val resourceProvider: ResourceProvider,
     private val updateTodoItemUseCase: UpdateTodoItemUseCase
 ) : BaseViewModel() {
@@ -37,7 +37,7 @@ class UpdateTodoDetailsViewModel @ViewModelInject constructor(
     fun onSaveClicked() {
         val updatedTodo = todo.value?.copy(
             title = todoText.value ?: "",
-            updatedAt = Time.now()
+            updatedAt = timeProvider.now()
         ) ?: return
 
         updateTodoItemUseCase.update(updatedTodo)
